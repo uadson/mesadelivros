@@ -34,6 +34,7 @@
   </thead>
     <tbody>
           
+        {% if livros%}
           {% for livro in livros %}
 
             <tr>
@@ -49,6 +50,12 @@
             </tr>
 
          {% endfor %}
+
+        {% else%}
+        
+          <h4>Não há Livros Cadastrados no Momento.</h4>
+           
+        {% endif%}
       
     </tbody>
 </table>
