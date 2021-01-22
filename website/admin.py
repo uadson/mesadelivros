@@ -9,10 +9,12 @@ class LivroAdmin(admin.ModelAdmin):
 
     list_display = (
         'titulo',
-        'autor',
-        'isbn',
+        'nome',
+        'sobrenome',
         'ano_pub',
+        'idioma',
         'categoria',
+        'isbn',
     )
 
     list_display_links = (
