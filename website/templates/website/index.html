@@ -2,6 +2,24 @@
 
 {% block content %}
 
+<!-- Paginação - Parte Superior-->
+<nav aria-label="Page navigation example">
+  <ul class="pagination">
+    {%for pagina in livros.paginator.page_range%}
+      {%if livros.number == pagina%} 
+          <li class="page-item active">
+            <a class="page-link" href="?{{pagina}}">{{pagina}}</a>
+          </li>
+      {% else %}
+           <li class="page-item">
+            <a class="page-link" href="?page={{pagina}}">{{pagina}}</a>
+          </li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+</nav>
+
+
 <table class="table">
   <thead>
     <tr>
@@ -9,23 +27,30 @@
       <th>Título</th>
       <th>Autor</th>
       <th>Ano de Publicação</th>
+      <th>Idioma</th>
       <th>Categoria</th>
+      <th>ISBN</th>
     </tr>
   </thead>
-  <tbody>
-    
+    <tbody>
+          
+          {% for livro in livros %}
 
-        <tr>
-          <td>-----</td>
-          <td>
-            <a href="#">1</a>
-          </td>
-          <td>2</td>
-          <td>3</td>
-          <td>4</td>
-        </tr>
+            <tr>
+              <td>{{ livro.id }}</td>
+              <td>
+                <a href="{% url 'website:detail' livro.id %}">{{ livro.titulo }}</a>
+              </td>
+              <td>{{ livro.sobrenome }}, {{ livro.nome }}</td>
+              <td>{{ livro.ano_pub|date:'Y'}}</td>
+              <td>{{ livro.idioma }}</td>
+              <td>{{ livro.categoria }}</td>
+              <td>{{ livro.isbn }}</td>
+            </tr>
 
-  </tbody>
+         {% endfor %}
+      
+    </tbody>
 </table>
 
 {% endblock %}

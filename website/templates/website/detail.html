@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<img src="{% static 'website/img/_apedcar.jpg' %}" width="300px" height="400px" align="right">
+
+<a href="{% url 'website:index' %}">Início</a>
+
+<h1 class="mt-5">{{livro.titulo}}</h1>
+
+<dl>
+  <dt>ID</dt>
+  <dd>{{livro.id}}</dd>
+
+  <dt>Autor</dt>
+  <dd>{{livro.sobrenome}}, {{livro.nome}}</dd>
+
+  <dt>Ano de Publicação</dt>
+  <dd>{{livro.ano_pub|date:'Y'}}</dd>
+
+  <dt>Idioma</dt>
+  <dd>{{livro.idioma}}</dd>
+
+  <dt>Categoria</dt>
+  <dd>{{livro.categoria}}</dd>
+
+  <dt>ISBN</dt>
+  <dd>{{livro.isbn}}</dd>
+
+  <dt>Descrição</dt>
+  <dd>
+    {{livro.descricao}}
+  </dd>
+</dl>
+
+
+
+{% endblock %}
