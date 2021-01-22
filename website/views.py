@@ -6,40 +6,33 @@ from django.core.paginator import Paginator
 
 
 def index(request):
+	# 'livros=' recebe os objetos da classe Livro ordenados pelo id de mode decrescente
 	livros = Livro.objects.order_by('-id')
-
+	# os objetos visualizados em quantidade de 5 por pagina
 	paginator = Paginator(livros, 5)
-
 	page = request.GET.get('page')
 	livros = paginator.get_page(page)
-
 	return render(request, 'website/index.html', {
 		'livros': livros
 	})
 
 def detail(request, livro_id):
-
+	# em caso de id inválido retorna erro 404
 	livro = get_object_or_404(Livro, id=livro_id)
-
-	context = {
+	return render(request, 'website/detail.html', {
 		'livro': livro
-	}
-	return render(request, 'website/detail.html', context)
+		})
 
 def search(request):
-	term = request.GET.get('term')	
-
+	term = request.GET.get('term')
+	# objetos ordenados em modo decrescente filtrados pelo temo digitado	
 	livros = Livro.objects.order_by('-id').filter(
-		titulo=term,
+		# __icontains facilita a busca tornando dispensável a digitação do termo completo
+		titulo__icontains=term,
 	)
-
-	context = {
-		'livros': livros
-	}
-
 	paginator = Paginator(livros, 5)
-
 	page = request.GET.get('page')
 	livros = paginator.get_page(page)
-
-	return render(request, 'website/search.html', context)
+	return render(request, 'website/search.html', {
+		'livros': livros
+		})
