@@ -29,7 +29,7 @@ def search(request):
 	term = request.GET.get('term')
 	# objetos ordenados em modo decrescente filtrados pelo temo digitado	
 	
-	if term is None:
+	if term is None or not term:
 		messages.add_message(
 			request, 
 			messages.ERROR, 
