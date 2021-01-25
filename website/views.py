@@ -1,6 +1,9 @@
 from django.shortcuts import render, get_object_or_404
+from django.http import Http404
 from .models import Livro, Categoria
 from django.core.paginator import Paginator
+from django.db.models import Q, Value
+from django.db.models.functions import Concat
 
 # Create your views here.
 
@@ -26,10 +29,18 @@ def detail(request, livro_id):
 def search(request):
 	term = request.GET.get('term')
 	# objetos ordenados em modo decrescente filtrados pelo temo digitado	
-	livros = Livro.objects.order_by('-id').filter(
-		# __icontains facilita a busca tornando dispensável a digitação do termo completo
-		titulo__icontains=term,
-	)
+	
+	if term is None:
+		raise Http404()
+
+	campos = Concat('nome', Value(' '), 'sobrenome')
+	
+	livros = Livro.objects.annotate(
+		nome_completo=campos
+		).filter(
+			Q(nome_completo__icontains=term) | Q(titulo__icontains=term) 
+		)
+
 	paginator = Paginator(livros, 5)
 	page = request.GET.get('page')
 	livros = paginator.get_page(page)

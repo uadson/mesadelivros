@@ -8,11 +8,11 @@
     {%for pagina in livros.paginator.page_range%}
       {%if livros.number == pagina%} 
           <li class="page-item active">
-            <a class="page-link" href="?{{pagina}}">{{pagina}}</a>
+            <a class="page-link" href="?page={{pagina}}&term={{ request.GET.term}}">{{pagina}}</a>
           </li>
       {% else %}
            <li class="page-item">
-            <a class="page-link" href="?page={{pagina}}">{{pagina}}</a>
+            <a class="page-link" href="?page={{pagina}}&term={{ request.GET.term }}">{{pagina}}</a>
           </li>
       {% endif %}
     {% endfor %}
