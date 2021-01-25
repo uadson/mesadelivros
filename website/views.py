@@ -30,7 +30,7 @@ def search(request):
 	term = request.GET.get('term')
 	# objetos ordenados em modo decrescente filtrados pelo temo digitado	
 	
-	if term is None:
+	if term is None or term is not None:
 		raise Http404()
 
 	campos = Concat('nome', Value(' '), 'sobrenome')
