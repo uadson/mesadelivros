@@ -3,11 +3,15 @@
 
 {% block content %}
 
-<img src="{% static 'website/img/_apedcar.jpg' %}" width="300px" height="400px" align="right">
+
 
 <a href="{% url 'website:index' %}">Início</a>
 
 <h1 class="mt-5">{{livro.titulo}}</h1>
+
+{% if livro.imagem %}
+  <img src="{{livro.imagem.url}}" style="max-width: 300px; height: auto;">
+{% endif %}
 
 <dl>
   <dt>ID</dt>
