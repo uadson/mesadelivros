@@ -26,13 +26,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '$j3#oqv1jnh@b_0jll#mwbni9i$vj@-pcydm+h_!ls_7h%vb2y'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+#DEBUG = True
 
-ALLOWED_HOSTS = []
+#ALLOWED_HOSTS = []
 
-#DEBUG = False
+DEBUG = False
 
-#ALLOWED_HOSTS = ['mesadelivros.herokuapp.com', '127.0.0.1']
+ALLOWED_HOSTS = ['mesadelivros.herokuapp.com', '127.0.0.1']
 
 
 # Application definition
