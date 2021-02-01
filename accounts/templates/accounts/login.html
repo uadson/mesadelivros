@@ -2,4 +2,6 @@
 
 {% block content %}
 Login
+{% include 'partials/_messages.html' %}
+<a href="{% url 'accounts:login' %}">Fazer Login</a>
 {% endblock %}
