@@ -26,7 +26,7 @@ def login(request):
 
 def logout(request):
 	auth.logout(request)
-	return redirect('accounts:index')
+	return redirect('accounts:login')
 	
 # registro/cadastro de usuário/senha
 def register(request):
