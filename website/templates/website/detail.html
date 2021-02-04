@@ -1,17 +1,17 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block title %} {{livro.titulo}} | {% endblock %}
+
 {% block content %}
-
-
 
 <a href="{% url 'website:index' %}">Início</a>
 
-<h1 class="mt-5">{{livro.titulo}}</h1>
-
 {% if livro.imagem %}
-  <img src="{{livro.imagem.url}}" style="max-width: 300px; height: auto;">
+  <img align="right" src="{{livro.imagem.url}}" style="max-width: 300px; height: auto;">
 {% endif %}
+
+<h1 class="mt-5">{{livro.titulo}}</h1>
 
 <dl>
   <dt>ID</dt>
