@@ -3,6 +3,7 @@ from django.contrib import messages, auth
 from django.core.validators import validate_email
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from .models import FormLivro
 
 # Create your views here.
 
@@ -102,3 +103,25 @@ def register(request):
 @login_required(redirect_field_name='accounts:login')
 def dashboard(request):
 	return render(request, 'accounts/dashboard.html')	
+	
+def cadlivro(request):
+	if request.method != 'POST':
+		form = FormLivro()
+		return render(request, 'accounts/cadlivro.html', {
+			'form': form
+			})
+
+	form = FormLivro(request.POST, request.FILES)
+
+	if not form.is_valid():
+		messages.error(request, 'Erro ao enviar formulário.')
+		form = FormLivro(request.POST)
+		return render(request, 'accounts/cadlivro.html', {
+			'form': form
+			})
+
+	form.save()
+	messages.success(
+		request, f'Livro {request.POST.get("titulo")} cadastrado com sucesso.'
+		)
+	return redirect('accounts:cadlivro')
