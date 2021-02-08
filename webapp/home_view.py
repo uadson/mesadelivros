@@ -1,14 +1,5 @@
-from django.http import HttpResponse
+from django.shortcuts import render
 
 
 def home(request):
-	return HttpResponse(
-		'''
-			<hr>
-			<h3>Biblioteca Digital</h3>
-			<hr>
-			<h4>Em Construção<h4>
-			<a href="index/">Clique Aqui</a>
-			<hr>
-		'''
-		)
+	return render(request, 'website/home.html')
