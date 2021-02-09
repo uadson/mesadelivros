@@ -27,11 +27,9 @@ SECRET_KEY = '$j3#oqv1jnh@b_0jll#mwbni9i$vj@-pcydm+h_!ls_7h%vb2y'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 #DEBUG = True
-
 #ALLOWED_HOSTS = []
 
 DEBUG = False
-
 ALLOWED_HOSTS = ['mesadelivros.herokuapp.com', '127.0.0.1']
 
 

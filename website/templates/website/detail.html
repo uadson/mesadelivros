@@ -7,8 +7,8 @@
 
 <a href="{% url 'website:index' %}">Início</a>
 
-{% if livro.imagem %}
-  <img align="right" src="{{livro.imagem.url}}" style="max-width: 300px; height: auto;">
+{% if livro.capa %}
+  <img align="right" src="{{livro.capa.url}}" style="max-width: 300px; height: auto;">
 {% endif %}
 
 <h1 class="mt-5">{{livro.titulo}}</h1>
