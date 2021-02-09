@@ -20,7 +20,7 @@ class Livro(models.Model):
     categoria = models.ForeignKey(Categoria, on_delete=models.DO_NOTHING)
     isbn = models.CharField(max_length=50, null=False, blank=False)
     descricao = models.TextField(blank=True)
-    imagem = models.ImageField(blank=True, upload_to='imagens/%Y/%m/')
+    capa = models.ImageField(blank=True, upload_to='imagens/%Y/%m/')
 
     def __str__(self):
         return self.titulo
