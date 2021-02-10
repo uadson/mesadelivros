@@ -144,6 +144,4 @@ MESSAGE_TAGS = {
     messages.INFO: 'alert-info',
 }
 
-DISABLE_COLLECTSTATIC=1
-
 django_heroku.settings(locals())
