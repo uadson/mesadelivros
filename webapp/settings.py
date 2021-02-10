@@ -23,7 +23,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '$j3#oqv1jnh@b_0jll#mwbni9i$vj@-pcydm+h_!ls_7h%vb2y'
+#SECRET_KEY = '$j3#oqv1jnh@b_0jll#mwbni9i$vj@-pcydm+h_!ls_7h%vb2y'
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '$j3#oqv1jnh@b_0jll#mwbni9i$vj@-pcydm+h_!ls_7h%vb2y')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 #DEBUG = True
@@ -81,10 +82,12 @@ WSGI_APPLICATION = 'webapp.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-DATABASES = {
-    'default': dj_database_url.config(
-        default=f'sqlite:///{BASE_DIR}/db.sqlite3')
-}
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
+#DATABASES = {
+#    'default': dj_database_url.config(
+#        default=f'sqlite:///{BASE_DIR}/db.sqlite3')
+#}
 
 
 # Password validation
@@ -127,6 +130,10 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = 'media/'
+
+# Simplified static file serving.
+# https://warehouse.python.org/project/whitenoise/
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Mensagens
 
