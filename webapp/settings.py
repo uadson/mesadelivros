@@ -82,12 +82,10 @@ WSGI_APPLICATION = 'webapp.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-db_from_env = dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(db_from_env)
-#DATABASES = {
-#    'default': dj_database_url.config(
-#        default=f'sqlite:///{BASE_DIR}/db.sqlite3')
-#}
+DATABASES = {
+    'default': dj_database_url.config(
+        default=f'sqlite:///{BASE_DIR}/db.sqlite3')
+}
 
 
 # Password validation
@@ -144,3 +142,5 @@ MESSAGE_TAGS = {
     messages.SUCCESS: 'alert-success',
     messages.INFO: 'alert-info',
 }
+
+DISABLE_COLLECTSTATIC=1
