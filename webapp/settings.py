@@ -144,3 +144,5 @@ MESSAGE_TAGS = {
 }
 
 DISABLE_COLLECTSTATIC=1
+
+django_heroku.settings(locals())
