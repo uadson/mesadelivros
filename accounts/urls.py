@@ -11,4 +11,5 @@ urlpatterns = [
 	path('register/', views.register, name='register'),
 	path('dashboard/', views.dashboard, name='dashboard'),
 	path('cadlivro/', views.cadlivro, name='cadlivro'),
+	path('cadcateg/', views.cadcateg, name='cadcateg'),
 ]

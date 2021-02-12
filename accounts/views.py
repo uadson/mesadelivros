@@ -3,7 +3,7 @@ from django.contrib import messages, auth
 from django.core.validators import validate_email
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from .models import FormLivro
+from .models import FormCategoria, FormLivro
 
 # Create your views here.
 
@@ -125,3 +125,25 @@ def cadlivro(request):
 		request, f'Livro {request.POST.get("titulo")} cadastrado com sucesso.'
 		)
 	return redirect('accounts:cadlivro')
+
+def cadcateg(request):
+	if request.method != 'POST':
+		form = FormCategoria()
+		return render(request, 'accounts/cadcateg.html', {
+			'form': form
+			})
+
+	form = FormCategoria(request.POST, request.FILES)
+
+	if not form.is_valid():
+		messages.error(request, 'Erro ao cadastrar categoria.')
+		form = FormCategoria(request.POST)
+		return render(request, 'accounts/cadcateg.html', {
+			'form': form
+			})
+
+	form.save()
+	messages.success(
+		request, f'Categoria {request.POST.get("nome")} cadastrada com sucesso.'
+		)
+	return redirect('accounts:cadcateg')
