@@ -20,7 +20,6 @@ class Livro(models.Model):
         )
     idioma = models.CharField(max_length=50, null=False, blank=False)
     categoria = models.ForeignKey(Categoria, on_delete=models.DO_NOTHING)
-    isbn = models.CharField(max_length=50, null=False, blank=False)
     descricao = models.TextField(blank=True)
     capa = models.ImageField(blank=True, upload_to='imagens/%Y/%m/')
 
