@@ -32,30 +32,28 @@ background-repeat: no-repeat;
 background-size: cover;
 }
 
-
 </style>
 
 </head>
 
 <body>
 
-
 <img src="{% static 'website/vendor/bootstrap/img/logo_home.jpg' %}">
-
-<button type="button" class="btn btn-dark btn-lg">
-<a href="{% url 'website:index' %}">Ir para Mesa</a></button>
-<button type="button" class="btn btn-secondary btn-lg">Sobre mim</button>
 
 <!-- navbar -->
 <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
 <!-- Título/Marca do site -->
 <a class="navbar-brand" href="#">Bem Vindo(a) à Mesa de Livros</a>
-
   <!-- Botão que será exibido quando estiver em uma tela menor -->
   <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 </nav>
+
+<button type="button" class="btn btn-dark btn-lg">
+<a href="{% url 'website:index' %}">Ir para Mesa</a></button>
+<button type="button" class="btn btn-secondary btn-lg">Sobre mim</button>
+
 
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
