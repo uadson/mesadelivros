@@ -14,7 +14,6 @@ class LivroAdmin(admin.ModelAdmin):
         'ano_pub',
         'idioma',
         'categoria',
-        'isbn',
     )
 
     list_display_links = (
