@@ -28,7 +28,7 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '$j3#oqv1jnh@b_0jll#mwbni9i$vj@
 
 # SECURITY WARNING: don't run with debug turned on in production!
 #DEBUG = True
-#ALLOWED_HOSTS = []
+#LLOWED_HOSTS = []
 
 DEBUG = False
 ALLOWED_HOSTS = ['*']
@@ -71,6 +71,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media'
             ],
         },
     },
@@ -127,7 +128,7 @@ USE_TZ = True
 STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
 STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = 'media/'
+MEDIA_URL = '/media/'
 
 # Mensagens
 

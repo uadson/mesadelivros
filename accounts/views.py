@@ -122,7 +122,7 @@ def cadlivro(request):
 
 	form.save()
 	messages.success(
-		request, f'Livro {request.POST.get("titulo")} cadastrado com sucesso.'
+		request, f'Livro {request.POST.get("titulo")} foi cadastrado com sucesso.'
 		)
 	return redirect('accounts:cadlivro')
 
@@ -144,7 +144,7 @@ def cadcateg(request):
 
 	form.save()
 	messages.success(
-		request, f'Categoria {request.POST.get("nome")} cadastrada com sucesso.'
+		request, f'Categoria {request.POST.get("nome")} foi cadastrada com sucesso.'
 		)
 	return redirect('accounts:cadcateg')
 
