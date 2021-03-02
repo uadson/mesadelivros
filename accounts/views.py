@@ -147,3 +147,6 @@ def cadcateg(request):
 		request, f'Categoria {request.POST.get("nome")} cadastrada com sucesso.'
 		)
 	return redirect('accounts:cadcateg')
+
+def user(request):
+	return render(request, 'accounts/userform.html')
