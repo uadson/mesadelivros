@@ -43,7 +43,7 @@ def register(request):
 	senha = request.POST.get('senha')
 	senha2 = request.POST.get('senha2')
 
-	# se todos ou algum campos não for preenchido, retorne a mensagem de erro
+	# se todos ou algum campo não for preenchido, retorne a mensagem de erro
 	# e em seguida o formulário em branco
 	if not nome or not sobrenome or not email or not usuario \
 			or not senha or not senha2:
@@ -149,4 +149,7 @@ def cadcateg(request):
 	return redirect('accounts:cadcateg')
 
 def user(request):
+	if request.method != 'PUT':
+		return render(request, 'accounts/userform.html')
+
 	return render(request, 'accounts/userform.html')
