@@ -7,7 +7,7 @@ from .models import FormCategoria, FormLivro
 
 # Create your views here.
 
-
+# 1. Tela de Login
 def login(request):
 	if request.method != 'POST':
 		return render(request, 'accounts/login.html')
@@ -25,11 +25,79 @@ def login(request):
 	 	messages.success(request, 'Login efetuado com sucesso.')
 	 	return redirect('accounts:dashboard')
 
+# 2. Desconectando Usuário do Sistema
 def logout(request):
 	auth.logout(request)
 	return redirect('accounts:login')
-	
-# registro/cadastro de usuário/senha
+
+
+# 3. Tela de Redefinição de Senha
+def pwreset(request):
+	"""Função com objetivo de verificar dados e realizar ou 
+	não a redefinição de senha conforme solicitação do usuário."""
+
+	if request.method != 'POST':
+		return render(request, 'accounts/password_reset.html')
+
+	# variáveis que receberam os dados informados
+	email = request.POST.get('email')
+	senha = request.POST.get('senha')
+	senha2 = request.POST.get('senha2')
+
+	# a) se nenhum dado for informado, retorna mensagem de erro.
+	if not email or not senha or not senha2:
+		messages.error(request, 'Todos os campos devem ser preenchidos.')
+		return render(request, 'accounts/password_reset.html')
+
+	# b) verificando o formato do email ex.: email@email.com, etc
+	# se por exemplo email@b ou email@email, retorna mensagem de erro
+	try:
+		validate_email(email)
+	except:
+		messages.error(request, 'Formato do email é inválido.')
+		return render(request, 'accounts/password_reset.html')
+
+	# c) verifica se senhas possuem no mínimo 6 caracteres, 
+	# caso contrário retorna mensagem de erro.
+	if len(senha) < 6:
+		messages.error(request, 'Senha deve ter no mínimo 6 caracteres.')
+		return render(request, 'accounts/password_reset.html')
+
+	# d) verifica se as senhas informadas são iguais, caso contrário,
+	# retorna mensagem de erro.
+	if senha != senha2:
+		messages.error(request, 'Senhas não conferem.')
+		return render(request, 'accounts/password_reset.html')
+
+	# e) verifica se o email informado já está cadastrado na base de dados.
+	# se sim, redefine a senha
+	# se não retorna mensagem de erro.
+	if not User.objects.filter(email=email).exists():
+		messages.error(request, 'Email não cadastrado, clique em Registrar-se.')
+		return render(request, 'accounts/password_reset.html')
+	else:
+		# obtendo nomes de usuário que não são super usuários
+		user = User.objects.filter(is_superuser=False)
+
+		# para cada usuario em user
+		for usuario_email in user:
+			# se algum possuir o email informado
+			if usuario_email.email == email:
+				# variavel usr recebe o valor do email
+				usr = User.objects.get(email=email)
+				# atualiza a senha
+				usr.set_password(senha)
+				# salva os dados
+				usr.save()
+				# retorna mensagem de redefinição de senha
+				messages.success(request, 'Nova senha cadastrada com sucesso.')
+				# redireciona para página de login
+				return redirect('accounts:login')
+
+	return render(request, 'accounts/password_reset.html')	
+
+
+# 4 . Formulário para Cadastro de Novos Usuários
 def register(request):
 	# se não houver nenhuma tentativa de cadastro retorne o formulário em branco
 	if request.method != 'POST':
