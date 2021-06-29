@@ -17,7 +17,7 @@
   --cyan: #17a2b8;
   --white: #fff;
   --gray: #6c757d;
-  --rede-dark: #b10e31;
+  --gray-dark: #343a40;
   --primary: #007bff;
   --secondary: #6c757d;
   --success: #28a745;
@@ -25,7 +25,7 @@
   --warning: #ffc107;
   --danger: #dc3545;
   --light: #f8f9fa;
-  --dark: #b10e31;
+  --dark: #343a40;
   --breakpoint-xs: 0;
   --breakpoint-sm: 576px;
   --breakpoint-md: 768px;
@@ -6781,13 +6781,13 @@ button.bg-light:focus {
 }
 
 .bg-dark {
-  background-color: #bd2130 !important;
+  background-color: #343a40 !important;
 }
 
 a.bg-dark:hover, a.bg-dark:focus,
 button.bg-dark:hover,
 button.bg-dark:focus {
-  background-color: #bd2130 !important;
+  background-color: #1d2124 !important;
 }
 
 .bg-white {
@@ -6867,7 +6867,7 @@ button.bg-dark:focus {
 }
 
 .border-dark {
-  border-color: #bd2130 !important;
+  border-color: #343a40 !important;
 }
 
 .border-white {
