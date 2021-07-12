@@ -7,9 +7,11 @@ import datetime
 class Categoria(models.Model):
     nome = models.CharField(max_length=100, null=False, blank=False)
 
+    class Meta:
+        db_table = 'categoria'
+
     def __str__ (self):
         return self.nome
-
 
 class Livro(models.Model):
     titulo = models.CharField(max_length=200, null=False, blank=False)
@@ -22,6 +24,9 @@ class Livro(models.Model):
     categoria = models.ForeignKey(Categoria, on_delete=models.DO_NOTHING)
     descricao = models.TextField(blank=True)
     capa = models.ImageField(blank=True, upload_to="")
+
+    class Meta:
+        db_table = 'livro'
 
     def __str__(self):
         return self.titulo
