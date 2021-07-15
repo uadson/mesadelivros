@@ -1,6 +1,13 @@
 # mesadelivros
 
-Projeto de uma aplicação web com tela de login, campo de busca, paginação e dashboard
+Project link in production mode:
 
-Link do Projeto
-[Mesa de Livro](mesadelivros.herokuapp.com)
+[MesaDeLivros](mesadelivros.herokuapp.com)
+
+Topics covered in the project:
+
+    1. Pagination
+    2. Search field
+    3. User registration
+    4. Login screen
+    5. Product registration form (Books)
