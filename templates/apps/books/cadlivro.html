@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %} Cadastro de Livro | {% endblock %}
+
+{% block content %}
+
+{% include 'partials/_messages.html' %}
+
+{% if not user.is_authenticated %}
+
+	<p>
+		Você precisa estar logado para cadastrar livros.
+	</p>
+	<a href="{% url 'login' %}">Clique aqui</a> para efetuar o login.
+
+{% else %}
+	
+	<p> Seja Bem-Vindo(a) {{user}}. <div style="word-spacing: 5px;"><a href="{% url 'logout' %}">Sair</a></div></p>
+
+
+	<div class="container">
+		<form action="{% url 'cadlivro' %}" method="POST" enctype="multipart/form-data">
+			{% csrf_token %}
+			<table class="table">
+				<td>
+					<a href="{% url 'cadcateg' %}">Cadastrar Categoria</a>
+				</td>
+				{{form}}
+				<tr>
+					<td colspan="2">
+						<button type="submit" class="btn btn-primary">Salvar</button>
+					</td>
+				</tr>
+			</table>
+		</form>	
+	</div>
+
+{% endif %}
+
+{% endblock %}
