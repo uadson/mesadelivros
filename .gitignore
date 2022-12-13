@@ -128,3 +128,10 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
+# Local files
+*/local.py
+local.py
+
+# Gen dotenv
+*/gendotenv.py
+gendotenv.py
