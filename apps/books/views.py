@@ -37,7 +37,7 @@ def search(request):
 			messages.ERROR, 
 			'Campo não pode ficar vazio.'
 		)
-		return redirect('books:index')
+		return redirect('index')
 
 	campos = Concat('nome', Value(' '), 'sobrenome')
 	
@@ -79,7 +79,7 @@ def cadlivro(request):
     return redirect('cadlivro')
 
 
-# @login_required(login_url='/login/')
+@login_required(login_url='/login/')
 def altlivro(request, pk):
     livro = get_object_or_404(Livro, pk=pk)
     
@@ -96,6 +96,18 @@ def altlivro(request, pk):
     context={'form':form}
         
     return render(request, 'apps/books/altlivro.html', context)
+
+
+@login_required(login_url='/login/')
+def del_livro(request, pk):
+    livro = get_object_or_404(Livro, pk=pk)
+    
+    if livro:
+        obj = Livro.objects.get(pk=pk)
+        obj.delete()
+        messages.success(request, 'Livro excluído com sucesso!')
+    
+    return redirect('index')
 
 
 @login_required(login_url='/login/')

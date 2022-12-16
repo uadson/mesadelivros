@@ -8,7 +8,7 @@
 <div class="btn-group" role="group" aria-label="Basic example" style="margin-top: 20px;">
   <a href="{% url 'index' %}" ><button type="button" class="btn btn-primary">Home</button></a>
   <a href="{% url 'altlivro' pk=livro.id %}" ><button type="button" class="btn btn-secondary">Alterar</button></a>
-  <button type="button" class="btn btn-danger">Excluir</button>
+  <a href="{% url 'del_livro' pk=livro.id %}" ><button type="button" class="btn btn-danger">Excluir</button></a>
 </div>
 
 {% if livro.capa %}

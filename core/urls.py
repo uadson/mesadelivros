@@ -8,7 +8,7 @@ from apps.accounts.views import (
 )
 
 from apps.books.views import (
-    index, detail, search, cadcateg, cadlivro, altlivro
+    index, detail, search, cadcateg, cadlivro, altlivro, del_livro
 )
 
 app_name = [
@@ -35,5 +35,6 @@ urlpatterns = [
     path('cadlivro/', cadlivro, name='cadlivro'),
 	path('cadcateg/', cadcateg, name='cadcateg'),
     path('alterar/<int:pk>/', altlivro, name='altlivro'),
+    path('excluir/<int:pk>/', del_livro, name='del_livro'),
     
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
