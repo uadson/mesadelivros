@@ -5,13 +5,17 @@
 
 {% block content %}
 
-<a href="{% url 'books:index' %}">Início</a>
+<div class="btn-group" role="group" aria-label="Basic example" style="margin-top: 20px;">
+  <a href="{% url 'index' %}" ><button type="button" class="btn btn-primary">Home</button></a>
+  <a href="{% url 'altlivro' pk=livro.id %}" ><button type="button" class="btn btn-secondary">Alterar</button></a>
+  <button type="button" class="btn btn-danger">Excluir</button>
+</div>
 
 {% if livro.capa %}
-  <img align="right" src="{{livro.capa.url}}" style="max-width: 300px; height: auto;">
+  <img align="right" src="{{livro.capa.url}}" style="max-width: 200px; margin-top: 80px;">
 {% endif %}
 
-<h1 class="mt-5">{{livro.titulo}}</h1>
+<h2 class="mt-5">{{livro.titulo}}</h2>
 
 <dl>
   <dt>ID</dt>

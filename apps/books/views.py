@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import Http404
 from .models import Livro
-from .forms import FormCategoria, FormLivro
+from .forms import FormCategoria, FormLivro, FormAlteraLivro
 from django.core.paginator import Paginator
 from django.db.models import Q, Value
 from django.db.models.functions import Concat
@@ -76,7 +76,26 @@ def cadlivro(request):
     messages.success(
         request, f'Livro {request.POST.get("titulo")} foi cadastrado com sucesso.'
     )
-    return redirect('books:cadlivro')
+    return redirect('cadlivro')
+
+
+# @login_required(login_url='/login/')
+def altlivro(request, pk):
+    livro = get_object_or_404(Livro, pk=pk)
+    
+    if request.method == 'POST':
+        form = FormAlteraLivro(request.POST, instance=livro)
+        
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Dados atualizados com sucesso.')
+            return redirect('index')
+    else:
+        form = FormAlteraLivro(instance=livro)
+        
+    context={'form':form}
+        
+    return render(request, 'apps/books/altlivro.html', context)
 
 
 @login_required(login_url='/login/')
@@ -100,4 +119,4 @@ def cadcateg(request):
     messages.success(
         request, f'Categoria {request.POST.get("nome")} foi cadastrada com sucesso.'
     )
-    return redirect('books:cadcateg')
+    return redirect('cadcateg')

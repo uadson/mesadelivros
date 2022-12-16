@@ -15,8 +15,7 @@ class Categoria(models.Model):
 
 class Livro(models.Model):
     titulo = models.CharField(max_length=200, null=False, blank=False)
-    nome = models.CharField(max_length=20, null=False, blank=False)
-    sobrenome = models.CharField(max_length=50, null=False, blank=False)
+    autor = models.CharField(max_length=150, null=False, blank=False)
     ano_pub = models.DateField(
         default=datetime.date.today, null=False, blank=False
         )

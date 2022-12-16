@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages, auth
 from django.core.validators import validate_email
-from django.contrib.auth.models import User
+from .models import User
 from django.contrib.auth.decorators import login_required
 
 
@@ -9,9 +9,9 @@ from django.contrib.auth.decorators import login_required
 def login(request):
     if request.method == 'POST':
         
-        usuario = request.POST.get('usuario')
-        senha = request.POST.get('senha')
-        user = auth.authenticate(request, username=usuario, password=senha)
+        email = request.POST.get('email')
+        senha = request.POST.get('password')
+        user = auth.authenticate(request, email=email, password=senha)
 
         if not user:
             messages.error(request, 'Usuário ou senha inválidos.')
@@ -19,7 +19,7 @@ def login(request):
         else:
             auth.login(request, user)
             messages.success(request, 'Login efetuado com sucesso.')
-            return redirect('apps/accounts:dashboard')
+            return redirect('dashboard')
     else:
         return render(request, 'apps/accounts/login.html')
 
@@ -27,7 +27,7 @@ def login(request):
 # 2. Desconectando Usuário do Sistema
 def logout(request):
     auth.logout(request)
-    return redirect('apps/accounts:login')
+    return redirect('login')
 
 
 # 3. Tela de Redefinição de Senha
@@ -40,7 +40,7 @@ def pwreset(request):
 
     # variáveis que receberam os dados informados
     email = request.POST.get('email')
-    senha = request.POST.get('senha')
+    senha = request.POST.get('password')
     senha2 = request.POST.get('senha2')
 
     # a) se nenhum dado for informado, retorna mensagem de erro.
@@ -92,7 +92,7 @@ def pwreset(request):
                 # retorna mensagem de redefinição de senha
                 messages.success(request, 'Nova senha cadastrada com sucesso.')
                 # redireciona para página de login
-                return redirect('apps/accounts:login')
+                return redirect('login')
 
     return render(request, 'apps/accounts/password_reset.html')
 
@@ -107,13 +107,12 @@ def register(request):
     nome = request.POST.get('nome')
     sobrenome = request.POST.get('sobrenome')
     email = request.POST.get('email')
-    usuario = request.POST.get('usuario')
-    senha = request.POST.get('senha')
+    senha = request.POST.get('password')
     senha2 = request.POST.get('senha2')
 
     # se todos ou algum campo não for preenchido, retorne a mensagem de erro
     # e em seguida o formulário em branco
-    if not nome or not sobrenome or not email or not usuario \
+    if not nome or not sobrenome or not email \
             or not senha or not senha2:
         messages.error(request, 'Todos os campos devem ser preenchidos.')
         return render(request, 'apps/accounts/register.html')
@@ -124,12 +123,6 @@ def register(request):
         validate_email(email)
     except:
         messages.error(request, 'Email inválido.')
-        return render(request, 'apps/accounts/register.html')
-
-    # validacao de nome de usuário
-    if len(usuario) < 6:
-        messages.error(
-            request, 'Nome de usuário precisa ter 6 caracteres ou mais.')
         return render(request, 'apps/accounts/register.html')
 
     # validacao de senha
@@ -148,12 +141,6 @@ def register(request):
         messages.error(request, 'Email já existe.')
         return render(request, 'apps/accounts/register.html')
 
-    # checando cadastro de usuário
-    # se o nome de usuário estiver cadastrado anteriormente retorna mensagem de erro
-    if User.objects.filter(username=usuario).exists():
-        messages.error(request, 'Usuário já existe.')
-        return render(request, 'apps/accounts/register.html')
-
     # mensage de confirmação de registro/cadastro de usuário
     messages.success(request, 'Usuário cadastrado com sucesso!')
 
@@ -162,7 +149,6 @@ def register(request):
         first_name=nome,
         last_name=sobrenome,
         email=email,
-        username=usuario,
         password=senha
     )
     user.save()
