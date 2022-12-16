@@ -31,6 +31,9 @@ INSTALLED_APPS = [
     # Local Apps
     'apps.accounts',
     'apps.books',
+    
+    # 3rd Apps
+    'django_seed',
 ]
 
 MIDDLEWARE = [

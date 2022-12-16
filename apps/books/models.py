@@ -1,7 +1,15 @@
 from django.db import models
+from stdimage.models import StdImageField, JPEGField
 import datetime
+import uuid
 
-# Create your models here.
+
+def get_file_path(_instance, filename):
+    # separando nome do arquivo e extensão
+    ext = filename.split('.')[-1]
+    # criando um novo nome para arquivo em formato de hash
+    filename = f'{uuid.uuid4()}.{ext}'
+    return filename
 
 
 class Categoria(models.Model):
@@ -22,8 +30,17 @@ class Livro(models.Model):
     idioma = models.CharField(max_length=50, null=False, blank=False)
     categoria = models.ForeignKey(Categoria, on_delete=models.DO_NOTHING)
     descricao = models.TextField(blank=True)
-    capa = models.ImageField(blank=True, upload_to="")
-
+    # capa = StdImageField(upload_to=get_file_path,
+    #                             variations={
+    #                                 'thumbnail': {'with': 100, 
+    #                                               'height': 75, 
+    #                                               'crop': True}
+    #                             })
+    capa = JPEGField(
+        upload_to=get_file_path,
+        variations={'full': (None, None), 'thumbnail': (100, 75)},
+    )
+    
     class Meta:
         db_table = 'livro'
 

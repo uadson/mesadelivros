@@ -105,7 +105,7 @@ def del_livro(request, pk):
     if livro:
         obj = Livro.objects.get(pk=pk)
         obj.delete()
-        messages.success(request, 'Livro excluído com sucesso!')
+        messages.success(request, f'Livro: {livro.titulo} - excluído com sucesso!')
     
     return redirect('index')
 

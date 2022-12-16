@@ -62,7 +62,7 @@
               <td>
                 <a href="{% url 'detail' livro.id %}">{{ livro.titulo }}</a>
               </td>
-              <td>{{ livro.sobrenome }}, {{ livro.nome }}</td>
+              <td>{{ livro.autor }}</td>
               <td>{{ livro.ano_pub|date:'Y'}}</td>
               <td>{{ livro.idioma }}</td>
               <td>{{ livro.categoria }}</td>

@@ -15,8 +15,8 @@
 
 {% else %}
 	
-	<p> Seja Bem-Vindo(a) {{user}}. <div style="word-spacing: 5px;"><a href="{% url 'logout' %}">Sair</a></div></p>
-
+	<p> Seja Bem-Vindo(a) {{ user.get_full_name }}. <div style="word-spacing: 5px;"><a href="{% url 'logout' %}">Sair</a></div></p>
+ 
 
 	<div class="container">
 		<form action="" method="POST" enctype="multipart/form-data">
